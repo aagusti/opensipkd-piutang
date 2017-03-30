@@ -1,0 +1,32 @@
+id,kode,path,nama,status
+1701000,"F170100","/F170100","Parameter Keluaran",1
+1701001,"F170100-act","/F170100/{id}/act","Parameter Keluaran",1
+1702000,"F170200","/F170200","PBB Permohonan",1
+1702001,"F170200-add","/F170200/add","PBB Permohonan Add",1
+1702002,"F170200-edt","/F170200/{id}/edt","PBB Permohonan Edit",1
+1702003,"F170200-del","/F170200/{id}/del","PBB Permohonan Delete",1
+1702004,"F170200-act","/F170200/{id}/act","PBB Permohonan Action",1
+1702005,"F170200-rpt","/F170200/{rpt}/rpt","PBB Permohonan rpt",1
+1704010,"F170401","/F170401","Kirim Berkas",1
+1704011,"F170401-act","/F170401/{id}/act","Kirim Berkas Act",1
+1704012,"F170401-add","/F170401/add","Kirim Berkas Add",1
+1704013,"F170401-edt","/F170401/{id}/edt","Kirim Berkas Edit",1
+1704014,"F170401-del","/F170401/{id}/del","Kirim Berkas Delete",1
+1704020,"F170402","/F170402","Terima Berkas",1
+1704021,"F170402-act","/F170402/{id}/act","Terima Berkas Act",1
+1704023,"F170402-edt","/F170402/{id}/edt","Terima Berkas Edit",1
+1705010,"F170501","/F170501","Monitoring Berkas Pelayanan",1
+1705011,"F170501-act","/F170501/{id}/act","Monitoring Berkas Pelayanan Act",1
+1705020,"F170502","/F170502","Monitoring Berkas Pel.(Belum / Sudah Selesai)",1
+1705021,"F170502-act","/F170502/{id}/act","Monitoring Berkas Pel.(Belum / Sudah Selesai) Act",1
+1709000,"F170900","/F170900","PBB Restitusi Kompensasi",1
+1709020,"F170902","/F170902","PBB Restitusi Kompensasi",1
+1709021,"F170902-add","/F170902/add","PBB Restitusi Kompensasi Add",1
+1709022,"F170902-edt","/F170902/{id}/edt","PBB Restitusi Kompensasi Edit",1
+1709023,"F170902-del","/F170902/{id}/del","PBB Restitusi Kompensasi Delete",1
+1709024,"F170902-act","/F170902/{id}/act","PBB Restitusi Kompensasi Action",1
+1709025,"F170902-rpt","/F170902/{rpt}/rpt","PBB Restitusi Kompensasi rpt",1
+1709026,"F170902-post","/F170902/{id}/post","PBB Restitusi Kompensasi Posting",1
+1709040,"F170904","/F170904","Laporan PBB Restitusi Kompensasi",1
+1709041,"F170904-grid","/F170904/grid","Laporan PBB Restitusi Kompensasi",1
+1709042,"F170904-rpt","/F170904/rpt/{rpt}","Laporan PBB Restitusi Kompensasi",1

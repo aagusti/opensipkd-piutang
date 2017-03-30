@@ -1,0 +1,117 @@
+<html metal:use-macro="load: base.pt">
+<div metal:fill-slot="content">
+<div class="well">
+<h1>Web service SIMRAL ${request.company} </h1>
+<p><img src="/static/img/logo.png" class="img-float img-thumbnail"/>
+Selamat datang  di module <code>Web Service SIMRAL</code> ${request.company} module ini di desain untuk 
+untuk mengekspose methode yang diperlukan untuk SIMRAL dalam Menerima atau Mengirim data.
+Web Service Sangat Bergunakan  seingga interopabilitas system sehingga antar system yang 
+berbeda bahasa pemorgraman maupun database dapat saling berkomunikasi.
+<p>Web Servie Simral terdiri dari method</p>
+<ul>
+<li>Ketetapan (ketetapan)</li>
+<li>Realisasi (reaisasi)</li>
+<li>Realisasi Pemindah Bukuan (STS)</li>
+</ul>
+<p>Web Service PAJAK-SIMRAL ini menggunakan standard teknologi 
+<a href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTfull </a>
+Web Service dimana method yang disediakan menggunkan standart 
+<a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html">Request Method </a> diantaranya <code>GET, POST, PUT, DELETE, UPDATE</code>. 
+Untuk memperoleh data pajak yang dibutuhkan oleh aplikasi SIMRAL maka disini menggunakan REquest Method GET</p>
+<h4>Autentikasi</h4>
+<p>Mekanisme <a href="/ws"> Autentikasi </a>dibutuhkan sebaga sarana keamanan data dari request yang tidak harapkan</p>
+<h4>Ketetapan</h4>
+<h5>URL: <code>${request.url}/ketetapan/{tanggal}/api</code> </h5>
+<h5>Request Method: <code>GET</code> </h5>
+<h5>Input Param: <code>{tanggal} format YYYY-MM-DD atau YYYYMMDD</code></h5>
+<h5>Output Params:</h5>
+    <pre>
+[{
+    'id_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'no_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'tgl_pembukuan' : 'YYYY-MM-DD',
+    'jns_trx' : 'SSSSSSSSSSSSSSSSSSSSSSS', #PengakuanPiutang, PenerbitanSKRD PengakuanPdptTrmDmk
+    'no_bukti_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'tgl_bukti_trx' : 'YYYY-MM-DD',
+    'tgl_awal_periode' : 'YYYY-MM-DD',
+    'tgl_akhir_periode' : 'YYYY-MM-DD',
+    'no_dpa' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'no_sub_kegiatan' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'nm_penyetor' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'alamat_penyetor' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'npwp_penyetor' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'rincian_trx' : [{
+            'kd_rekening' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+            'nm_rekening' : 'SSSSSSSSSSSSSSSSSSSSSSSS'
+            'jumlah' : 'NNNNNNNNNNNNNNNN'
+        }
+    ]
+}]
+    </pre>
+ <h5>Contoh <a href="${request.url}/ketetapan/2016-02-11/api">${request.url}/ketetapan/2016-02-11/api</a></h5>    
+<h4>Realisasi</h4>
+<h5>URL: <code>${request.url}/realisasi/{tanggal}/api</code> </h5>
+<h5>Request Method: <code>GET</code> </h5>
+<h5>Input Param: <code>{tanggal} format YYYY-MM-DD atau YYYYMMDD</code></h5>
+<h5>Output Params:</h5>
+<pre>
+[{
+    'id_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'no_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'tgl_pembukuan' : 'YYYY-MM-DD',
+    'jns_trx' : 'SSSSSSSSSSSSSSSSSSS', #PengakuanPiutang, PenerbitanSKRD PengakuanPdptTrmDmk
+    'no_bukti_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'tgl_bukti_trx' : 'YYYY-MM-DD',
+    'cara_pembayaran': 'N',  #0 Melalui Bendahara, 1 Langsung Kasda
+    'pendapatann_thn_lalu': 'N'  # 0 Tidadk, 1 Ya, 2 Ya Atas Piutang
+    'pendapatan_dtrm_dimuka': 'N', # 0 Tidak, 1 Ya 
+    'tgl_awal_periode' : 'YYYY-MM-DD',
+    'tgl_akhir_periode' : 'YYYY-MM-DD',
+    'no_dpa' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'no_sub_kegiatan' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'nm_penyetor' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'alamat_penyetor' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'npwp_penyetor' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'trx_pengakuan_pdpt_id': 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'rincian_trx' : [{
+            'kd_rekening' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+            'nm_rekening' : 'SSSSSSSSSSSSSSSSSSSSSSSS'
+            'jumlah' : 'NNNNNNNNNNNNNNNN'
+        }
+    ]
+}]
+</pre>
+<h5>Contoh <a href="${request.url}/realisasi/2016-02-11/api">${request.url}/realisasi/2016-02-11/api</a></h5>    
+<h4>STS</h4>
+<h5>URL: <code>${request.url}/sts/{tanggal}/api</code> </h5>
+<h5>Request Method: <code>GET</code> </h5>
+<h5>Input Param: <code>{tanggal} format YYYY-MM-DD atau YYYYMMDD</code></h5>
+<h5>Output Params:</h5>
+<pre>
+[{
+    'id_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'no_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'no_sts' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'tgl_pembukuan' : 'YYYY-MM-DD',
+    'jns_trx' : 'SSSSSSSSSSSSSSSSSSS', #PengakuanPiutang, PenerbitanSKRD PengakuanPdptTrmDmk
+    'uraian_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'no_bukti_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+    'tgl_bukti_trx' : 'YYYY-MM-DD',
+    'cara_penyetoran': 'N',  #0 Melalui Bendahara, 1 Langsung Kasda
+    'nm_penandatangan_sts': 'N'  # 0 Tidadk, 1 Ya, 2 Ya Atas Piutang
+    'jab_penandatangan_sts': 'N', # 0 Tidak, 1 Ya 
+    'nip_penandatangan_sts' : 'YYYY-MM-DD',
+    'rincian_trx' : [{
+            'no_kohir' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+            'jumlah' : 'NNNNNNNNNNNNNNNN'
+        }
+    ]
+}]
+</pre>
+</div><!--well-->
+
+<br>
+
+
+</div>
+</html>

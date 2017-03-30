@@ -1,0 +1,25 @@
+id,kode,path,nama,status
+60000,"bphtb-akrual","/bphtb/akrual","BPHTB-Akrual",1
+60001,"bphtb-sa","/bphtb/sa","BPHTB-Saldo Awal",1
+60002,"bphtb-sa-act","/bphtb/sa/{id}/act","BPHTB-Saldo Awal Act",1
+60003,"bphtb-sa-view","/bphtb/sa/{id}/view","BPHTB-Saldo Awal View",1
+60004,"bphtb-sa-post","/bphtb/sa/{id}/post","BPHTB-Saldo Awal Post",1
+60005,"bphtb-sa-add","/bphtb/sa/add","BPHTB-Saldo Awal Tambah",1
+60006,"bphtb-sa-delete","/bphtb/sa/{id}/delete","BPHTB-Saldo Awal Hapus",1
+60007,"bphtb-sa-edit","/bphtb/sa/{id}/edit","BPHTB-Saldo Edit",1
+60008,"bphtb-sa-rpt","/bphtb/sa/{rpt}/rpt","BPHTB-rpt",1
+60011,"bphtb-ketetapan","/bphtb/ketetapan","BPHTB-Ketetapan",1
+60012,"bphtb-ketetapan-act","/bphtb/ketetapan/{id}/act","BPHTB-Ketetapan Action",1
+60013,"bphtb-ketetapan-view","/bphtb/ketetapan/{id}/view","BPHTB-Ketetapan View",1
+60014,"bphtb-ketetapan-post","/bphtb/ketetapan/{id}/post","BPHTB-Ketetapan Posting",1
+60015,"bphtb-ketetapan-rpt","/bphtb/ketetapan/{rpt}/rpt","BPHTB-Ketetapan rpt",1
+60021,"bphtb-realisasi","/bphtb/realisasi","BPHTB Realisasi Ketetapan",1
+60022,"bphtb-realisasi-act","/bphtb/realisasi/{id}/act","BPHTB Realisasi Ketetapan Act",1
+60023,"bphtb-realisasi-view","/bphtb/realisasi/{id}/view","BPHTB Realisasi Ketetapan View",1
+60024,"bphtb-realisasi-post","/bphtb/realisasi/{id}/post","BPHTB Realisasi Ketetapan Post",1
+60025,"bphtb-realisasi-rpt","/bphtb/realisasi/{rpt}/rpt","BPHTB Realisasi Ketetapan rpt",1
+60031,"bphtb-self","/bphtb/self","BPHTB Realisasi Self",1
+60032,"bphtb-self-act","/bphtb/self/{id}/act","BPHTB Realisasi  Self Act",1
+60033,"bphtb-self-view","/bphtb/self/{id}/view","BPHTB Realisasi Self View",1
+60034,"bphtb-self-post","/bphtb/self/{id}/post","BPHTB Realisasi Self Post",1
+60035,"bphtb-self-rpt","/bphtb/self/{rpt}/rpt","BPHTB Realisasi Self rpt",1

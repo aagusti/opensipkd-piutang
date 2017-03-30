@@ -1,0 +1,6 @@
+      [paste.app_factory]
+      main = piutang:main
+      [console_scripts]
+      initialize_opensipkd_piutang_db = piutang.scripts.initializedb:main
+      test_get_dop_bphtb = piutang.scripts.test_get_dop_bphtb:main
+      

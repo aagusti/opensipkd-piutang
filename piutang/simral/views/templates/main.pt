@@ -1,0 +1,32 @@
+<html metal:use-macro="load: base.pt">
+<div metal:fill-slot="navs">
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <li tal:attributes="class request.path == '/' and 'active'"><a href="/">Home</a></li>
+      <li class="dropdown">
+        <a href="/simral/rekening">Rekening</a>
+      </li>      
+      <li class="dropdown">
+        <a href="/simral/ketetapan">Ketetapan</a>
+      </li>
+      <li>
+        <a href="/simral/realisasi">Realiasi </a>
+      </li>
+      <li>
+        <a href="/simral/sts">STS </a>
+      </li>
+      <li>
+        <a href="/simral/ws">Web Service </a>
+      </li>
+      
+      <li class="dropdown" tal:attributes="class request.path in ['/password'] and 'active'">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account </a>
+        <ul class="dropdown-menu">
+          <li><a href="/logout">${request.user.nice_username()} Logout</a></li>
+          <li><a href="/password">Change password</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div><!--/.nav-collapse -->
+</div>
+</html>

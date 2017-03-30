@@ -1,0 +1,54 @@
+<html metal:use-macro="load: base.pt">
+
+<div metal:fill-slot="content">
+
+<!-- Main component for a primary marketing message or call to action -->
+<div class="well">
+<h1>Pajak Daerah ${request.company} </h1>
+<p><img src="/static/img/logo.png" class="img-float img-thumbnail"/>
+Selamat datang  di aplikasi <code>Pajak Daerah</code> ${request.company} aplikasi ini di desain untuk 
+memproses data pajak daerah (PBB, BPHTB dan Non PBB BPHTB)
+
+<p>Aplikasi pajak daerah terdiri dari module:</p>
+<strong>Pajak Daerah Non PBB BPHTB</strong>
+<ul>
+<li>Pajak Daerah Non PBB/BPHTB Back Office <a href="http://padl.tangselkotaorg/">PADL</a> </li>
+<li>Elektronik SPTPD (e-sptpd) <a href="http://e-sptpd.tangselkota.org/">E-SPTPD</a> </li>
+<li>Integrasi PDL Akuntansi <a href="http://padl.tangselkota.org">PDL Akrual</a></li>
+</ul>
+
+<strong>Pajak Bumi dan Banguan Perkotaan dan Pedesaan</strong>
+<ul>
+<li>Payment Online System PBB  <a href="http://pospbb.tangselkota.org">POS PBB</a></li>
+<li>PBB Monitoring <a href="http://pbb-bphtb.tangselkota.org">PBBM</a></li>
+<li>Pengelolaan Restitusi/Kompensasi PBB  <a href="/F170900?project=_restitusi">e-Restitusi</a></li>
+<li>SIG PBB <a href="http://sig.tangselkota.org/">SIG-PBB</a></li>
+<li>Elektronik SPPT <a href="/esppt">e-sppt</a></li>
+<li>System Informasi Objek Pajak PBB</li>
+<li>Data Sensus <a href="/pbb/sensus">e-sensus</a></li>
+</ul>
+
+<strong>Bea Perolehan Hak Atas Tanah dan Bangunan</strong>
+<ul>
+<li>Elektronik SSP BPHTB Monitoring <a href="http://pbb-bphtb.tangselkota.org">e-sspb</a></li>
+<li>Integrasi PBB BPHTB - Akuntansi <a href="/pbb/akrual?project=_akrual">PBB BPHTB Akrual</a></li>
+</ul>
+
+<strong>Aplikasi Non Core</strong> 
+<ul>
+<li><a href="/pbb/tools/">Tools Admin</a></li>
+<li><a href="/simral">Integrasi SIMRAL</a></li>
+<li>System Integrasi Perbankan (BJB/BCA/MANDIRI)</li>
+<li>Informasi Tagihan PBB Via Android <a href="https://play.google.com/store/apps/details?id=com.opensipkd.ipbb_tangsel">i-pbb</a></li>
+<li>Informasi Tagihan PBB Via SMS +6281210101070 Command <strong>NOP 36.76.kec.kel.blok.urut.jns.tahun</strong></li>
+<li>Informasi PBB Via email <strong>pbb-bphtb[at]tangerangselatankota.go.id</strong> dengan isi <strong>NOP 36.76.kec.kel.blok.urut.jns</strong></li>
+</ul>
+<strong><a href="/ws">Module Integrasi (Web Service)</a></strong>
+<ul>
+<li><a href="/pbb/ws">Web Service Pajak PBB-BPN-BPHTB</a></li>
+<li><a href="/simral/ws">Web Service Pajak-SIMRAL</a></li>
+</ul>
+</div><!--well-->
+
+</div>
+</html>

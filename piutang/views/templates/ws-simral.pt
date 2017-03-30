@@ -1,0 +1,185 @@
+<html metal:use-macro="load: base.pt">
+<div metal:fill-slot="content">
+<div class="well">
+<h1>Web service SIMRAL ${request.company} </h1>
+<p><img src="/static/img/logo.png" class="img-float img-thumbnail"/>
+Selamat datang  di module <code>Web Service SIMRAL</code> ${request.company} module ini di desain untuk 
+untuk mengekspose methode yang diperlukan untuk SIMRAL dalam Menerima atau Mengirim data.
+Web Service Sangat Bergunakan  seingga interopabilitas system sehingga antar system yang 
+berbeda bahasa pemorgraman maupun database dapat saling berkomunikasi.
+<p>Web Servie Simral terdiri dri method</p>
+<ul>
+<li>Ketetapan (ketetapan)</li>
+<li>Realisasi (reaisasi)</li>
+<li>Realisasi Pemindah Bukuan (STS)</li>
+</ul>
+<p><hr></p>
+<h4>URL </h4>
+
+<p><code>${req.application_url}/ws/simral</code></p>
+<h4>Method </h4>
+    <ul>
+     <code>ketetapan</code>
+    <h5>Input Param:</h5>
+    <pre>
+    {
+        "jsonrpc" : "2.0",
+        "id" : 1,
+        "method" : "ketetapan"
+        "params" : {
+            "data" : [{
+                    “jenis”: N,
+                    "tanggal" : "YYYY-MM-DD"
+                }
+            ]
+        },
+    }
+    </pre>
+    <h5>Output Params:</h5>
+    <pre>
+    {
+        'jsonrpc' : '2.0',
+        'id' : 1,
+        'result' : {
+            'message' : 'Data Submitted',
+            'code' : 0,
+            'params' : {
+                'data' : [{
+                        'id_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'no_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'tgl_pembukuan' : 'YYYY-MM-DD',
+                        'jns_trx' : 'SSSSSSSSSSSSSSSSSSSSSSS', #PengakuanPiutang, PenerbitanSKRD PengakuanPdptTrmDmk
+                        'no_bukti_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'tgl_bukti_trx' : 'YYYY-MM-DD',
+                        'tgl_awal_periode' : 'YYYY-MM-DD',
+                        'tgl_akhir_periode' : 'YYYY-MM-DD',
+                        'no_dpa' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'no_sub_kegiatan' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'nm_penyetor' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'alamat_penyetor' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'npwp_penyetor' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'rincian_trx' : [{
+                                'kd_rekening' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                                'nm_rekening' : 'SSSSSSSSSSSSSSSSSSSSSSSS'
+                                'jumlah' : 'NNNNNNNNNNNNNNNN'
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+    </pre>
+     <code>realisasi</code>
+    <h5>Input Param:</h5>
+    <pre>
+    {
+        "jsonrpc" : "2.0",
+        "id" : 1,
+        "method" : "realisasi"
+        "params" : {
+            "data" : [{
+                    “jenis”: N,
+                    "tanggal" : "YYYY-MM-DD"
+                }
+            ]
+        },
+    }
+    </pre>
+    <h5>Output Params:</h5>
+    <pre>
+    {
+        'jsonrpc' : '2.0',
+        'id' : 1,
+        'result' : {
+            'message' : 'Data Submitted',
+            'code' : 0,
+            'params' : {
+                'data' : [{
+                        'id_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'no_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'tgl_pembukuan' : 'YYYY-MM-DD',
+                        'jns_trx' : 'SSSSSSSSSSSSSSSSSSS', #PengakuanPiutang, PenerbitanSKRD PengakuanPdptTrmDmk
+                        'no_bukti_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'tgl_bukti_trx' : 'YYYY-MM-DD',
+                        'cara_pembayaran': 'N',  #0 Melalui Bendahara, 1 Langsung Kasda
+                        'pendapatann_thn_lalu': 'N'  # 0 Tidadk, 1 Ya, 2 Ya Atas Piutang
+                        'pendapatan_dtrm_dimuka': 'N', # 0 Tidak, 1 Ya 
+                        'tgl_awal_periode' : 'YYYY-MM-DD',
+                        'tgl_akhir_periode' : 'YYYY-MM-DD',
+                        'no_dpa' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'no_sub_kegiatan' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'nm_penyetor' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'alamat_penyetor' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'npwp_penyetor' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'trx_pengakuan_pdpt_id': 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'rincian_trx' : [{
+                                'kd_rekening' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                                'nm_rekening' : 'SSSSSSSSSSSSSSSSSSSSSSSS'
+                                'jumlah' : 'NNNNNNNNNNNNNNNN'
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+    </pre>
+ 
+    <code>sts</code>
+    <h5>Input Param:</h5>
+    <pre>
+    {
+        "jsonrpc" : "2.0",
+        "id" : 1,
+        "method" : "sts"
+        "params" : {
+            "data" : [{
+                    “jenis”: N,
+                    "tanggal" : "YYYY-MM-DD"
+                }
+            ]
+        },
+    }
+    </pre>
+    <h5>Output Params:</h5>
+    <pre>
+    {
+        'jsonrpc' : '2.0',
+        'id' : 1,
+        'result' : {
+            'message' : 'Data Submitted',
+            'code' : 0,
+            'params' : {
+                'data' : [{
+                        'id_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'no_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'no_sts' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'tgl_pembukuan' : 'YYYY-MM-DD',
+                        'jns_trx' : 'SSSSSSSSSSSSSSSSSSS', #PengakuanPiutang, PenerbitanSKRD PengakuanPdptTrmDmk
+                        'uraian_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'no_bukti_trx' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                        'tgl_bukti_trx' : 'YYYY-MM-DD',
+                        'cara_penyetoran': 'N',  #0 Melalui Bendahara, 1 Langsung Kasda
+                        'nm_penandatangan_sts': 'N'  # 0 Tidadk, 1 Ya, 2 Ya Atas Piutang
+                        'jab_penandatangan_sts': 'N', # 0 Tidak, 1 Ya 
+                        'nip_penandatangan_sts' : 'YYYY-MM-DD',
+                        'rincian_trx' : [{
+                                'no_kohir' : 'SSSSSSSSSSSSSSSSSSSSSSSS',
+                                'jumlah' : 'NNNNNNNNNNNNNNNN'
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+    </pre>
+    </ul>
+</div><!--well-->
+
+<br>
+
+
+</div>
+</html>

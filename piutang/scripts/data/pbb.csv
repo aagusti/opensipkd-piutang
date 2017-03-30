@@ -1,0 +1,18 @@
+id,kode,path,nama,status
+1000000,"F100000","/pbb","OPEN-PBB",1
+1604010,"F160401","/F160401","PBB Catatan Pembayaran",1
+1604011,"F160401-add","/F160401/add","PBB Catatan Pembayaran Add",1
+1604012,"F160401-edt","/F160401/{id}/edt","PBB Catatan Pembayaran Edit",1
+1604013,"F160401-del","/F160401/{id}/del","PBB Catatan Pembayaran Delete",1
+1604014,"F160401-act","/F160401/{id}/act","PBB Catatan Pembayaran Action",1
+1604015,"F160401-rpt","/F160401/{rpt}/rpt","PBB Catatan Pembayaran rpt",1
+1604016,"F160401-csv","/F160401/csv","PBB Catatan Pembayaran rpt",1
+9101011,"F910101","/F910101","BPHTB# Monitoring Validasi",1
+9101012,"F910101-act","/F910101/{act}/act","BPHTB# Monitoring Validasi Action",1
+9101021,"F910102","/F910102","PBB Proses Transaksi BPHTB",1
+9101022,"F910102-post","/F910102/{id}/post","PBB Proses Transaksi BPHTB Posting",1
+9101023,"F910102-act","/F910102/{act}/act","PBB Proses Transaksi BPHTB Action",1
+9101024,"F910102-rpt","/F910102/{rpt}/rpt","PBB Proses Transaksi BPHTB Report",1
+9101031,"F910103","/F910103","PBB Proses Transaksi BPHTB Posted",1
+9101032,"F910103-act","/F910103/{act}/act","PBB Proses Transaksi BPHTB Posted Action",1
+9101033,"F910103-rpt","/F910103/{rpt}/rpt","PBB Proses Transaksi BPHTB Posted Report",1

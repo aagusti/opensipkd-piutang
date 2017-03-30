@@ -1,0 +1,208 @@
+<html metal:use-macro="load: ../main${request.session['project']}.pt">
+<div metal:fill-slot="content">
+    <form id="myform" method="post" enctype="multipart/form-data" accept-charset="utf-8" 
+                 class="form-horizontal">
+        <div  class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">${request.title}</h3>
+            </div>
+            <div class="panel-body">
+                <div tal:condition="'id' in form" style="display:none;">
+                    <div tal:define="field form['id']">
+                        ${structure:field.serialize()}
+                    </div>
+                </div>
+                <div class="form-group" tal:define="field form['no_agenda']" id="item-${field.oid}">
+                    <label for="${field.oid}" class="control-label col-md-2" id="req-${field.oid}">
+                            ${field.title}</label>
+                    <div class="col-md-3">
+                        ${structure:field.serialize()}
+                        <p id="error-${field.oid}" class="text-danger" tal:condition="field.error"
+                           tal:repeat="error field.error.messages()">
+                           ${error}</p>
+                    </div>
+                </div>
+                <div class="form-group" tal:define="field form['seksi_kirim']" id="item-${field.oid}">
+                    <label for="${field.oid}" class="control-label col-md-2" id="req-${field.oid}">
+                            ${field.title}</label>
+                    <div class="col-md-3">
+                        ${structure:field.serialize()}
+                        <p id="error-${field.oid}" class="text-danger" tal:condition="field.error"
+                           tal:repeat="error field.error.messages()">
+                           ${error}</p>
+                    </div>
+                </div>
+                <div class="form-group" tal:define="field form['seksi_terima']" id="item-${field.oid}">
+                    <label for="${field.oid}" class="control-label col-md-2" id="req-${field.oid}">
+                            ${field.title}</label>
+                    <div class="col-md-3">
+                        ${structure:field.serialize()}
+                        <p id="error-${field.oid}" class="text-danger" tal:condition="field.error"
+                           tal:repeat="error field.error.messages()">
+                           ${error}</p>
+                    </div>
+                </div>
+                <div class="form-group" tal:define="field form['tgl_kirim']" id="item-${field.oid}">
+                    <label for="${field.oid}" class="control-label col-md-2" id="req-${field.oid}">
+                            ${field.title}</label>
+                    <div class="col-md-3">
+                        ${structure:field.serialize()}
+                        <p id="error-${field.oid}" class="text-danger" tal:condition="field.error"
+                           tal:repeat="error field.error.messages()">
+                           ${error}</p>
+                    </div>
+                </div>
+                <div class="form-group" tal:define="field form['tgl_terima']" id="item-${field.oid}">
+                    <label for="${field.oid}" class="control-label col-md-2" id="req-${field.oid}">${field.title}</label>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            ${structure:field.serialize()}
+                            <label for="${field.oid}" class="input-group-addon" id="req-${field.oid}-picker">
+                                <!--i class="glyphicon glyphicon-calendar"></i-->
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                        </div>
+                        <span id="error-${field.oid}" class="text-danger" tal:condition="field.error" tal:repeat="error field.error.messages()">${error}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#detail"><strong>Detail</strong></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div tal:define="field form['pst_detail']" id="item-${field.oid}">
+                        ${structure:field.serialize()}
+                        <div id="error-${field.oid}" tal:condition="field.error" tal:repeat="error field.error.messages()" style="display:none">${error}</div>
+                    </div>
+                    <div id="detail" class="tab-pane fade in active">
+                        <table id="table1" class="table ">
+                            <thead>
+                            <tr>
+                                <th><input name="select_all" type="checkbox"></th>
+                                <th>No.Pelayanan</th>
+                                <th>Jenis</th>
+                                <th>NOP</th>
+                                <th>Thn Pajak</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div id="btn-grup">
+                    <button id="deformsave" name="simpan" type="submit" class="btn btn-primary" value="simpan">Simpan</button>
+                    <button id="deformcancel" name="batal" type="submit" class="btn btn-danger" value="batal">Batal</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div metal:fill-slot="scripts">
+    <script type="text/javascript" src="/static/js/tools.js"></script>
+    <script>
+        var oTable;
+        var oTableUri = "${request.url.split('/')[0] + '//' + request.url.split('/')[2] + '/' + request.url.split('/')[3]}";
+        var mID = 0;
+        $(document).ready(function () {
+            var oTableUrl = oTableUri + '/edt-02/act?id=' + $('input#id').val();
+            $('input#tgl_terima').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:'dd-mm-yy'
+            });
+            var tgl = $('input#tgl_terima').val();
+            if (tgl == '') $('input#tgl_terima').val($.datepicker.formatDate('dd-mm-yy', new Date()));
+            var detVal = $('input#pst_detail').val();
+            rows_selected = (detVal != '') ? detVal.split(',') : [];
+            oTable = $('#table1').DataTable({
+                dom           : '<"toolbar">lfrtip',
+                processing    : true,
+                serverSide    : true,
+                ajax          : oTableUrl,
+                stateSave     : false,
+                //scrollY       : '500px',
+                scrollCollapse: true,
+                info          : false,
+                filter        : false,
+                autoWidth     : false,
+                paginate      : false,
+                retrieve      : true,
+                order         : [[1, 'asc']],
+                sort          :true,
+                columns: [
+                    { "data": "id",  "width": "60px", "class":"center", "orderable": false, "searchable": false,
+                        "render": function (data, type, full, meta){
+                                    return '<input type="checkbox">';
+                                 }
+                    },
+                    { "data": "nopel",  "width": "120px", "class":"left"},
+                    { "data": "jenis",  "width": "120px", "class":"center"},
+                    { "data": "nop",  "width": "120px", "class":"center"},
+                    { "data": "thn_pajak",  "width": "60px", "class":"center"}
+                ],
+                fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                    var rowId = aData.id;
+                    if($.inArray(rowId, rows_selected) !== -1) {
+                        $(nRow).find('input[type="checkbox"]').prop('checked', true);
+                        $(nRow).addClass('selected');
+                    }
+                }
+            });
+            var erpil = $('#error-pst_detail').text();
+            if (undefined != erpil && erpil != '') {
+                var tb_array = ['<span class="text-danger"><strong>' + erpil + '</strong></span>'];
+                var tb = tb_array.join(' ');
+                $("div.toolbar").html(tb);
+                $("div.toolbar").attr('style', 'display:block; float: left; margin-bottom:6px; line-height:16px;');
+            }
+            $('#table1 tbody').on('click', 'input[type="checkbox"]', function(e){
+                var $row = $(this).closest('tr');
+                var data = oTable.row($row).data();
+                var rowId = data.id;
+                var index = $.inArray(rowId, rows_selected);
+                if(this.checked && index === -1){
+                    rows_selected.push(rowId);
+                } else if (!this.checked && index !== -1){
+                    rows_selected.splice(index, 1);
+                }
+                if(this.checked){
+                    $row.addClass('selected');
+                } else {
+                    $row.removeClass('selected');
+                }
+                updateDataTableSelectAllCtrl(oTable);
+                e.stopPropagation();
+            });
+            $('#table1 thead input[name="select_all"]').on('click', function(e){
+                if(this.checked){
+                    $('#table1 tbody input[type="checkbox"]:not(:checked)').trigger('click');
+                } else {
+                    $('#table1 tbody input[type="checkbox"]:checked').trigger('click');
+                }
+                e.stopPropagation();
+            });
+            oTable.on('draw', function(){
+                updateDataTableSelectAllCtrl(oTable);
+            });
+            $('form#myform').on('submit', function() {
+                rows_selected = [];
+                $('#table1 tbody input[type="checkbox"]:checked').each(function(){
+                    var $row = $(this).closest('tr');
+                    var data = oTable.row($row).data();
+                    var rowId = data.id;
+                    rows_selected.push(rowId);
+                });
+                $('#pst_detail').val(rows_selected.join(','));
+                return true;
+            });
+            $('input#no_agenda, input#seksi_kirim, input#seksi_terima, input#tgl_kirim').attr('disabled', true);
+            $('input#tgl_terima').focus();
+        });
+    </script>
+</div>
+</html>
+

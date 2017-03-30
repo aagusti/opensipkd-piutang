@@ -1,0 +1,172 @@
+<html metal:use-macro="load: ../main${request.session['project']}.pt">
+
+<div metal:fill-slot="content">
+    <style type="text/css">
+        select.input-sm {height:26px}
+        .items-filter {
+            margin-left: -2px;
+            margin-bottom: 10px;
+        }
+        .items-filter .item-fltr {
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+    </style>
+    <h3>${request.title}</h3>
+    <hr>
+    <div class="row items-filter">
+        <div class="col-md-2 item-fltr">
+            <div class="input-group">
+                <label for="status" class="input-group-addon" id="req-status">Status</label>
+                <select id="status" class="form-control">
+                    <option value="0">(Semua)</option>
+                    <option value="1">Belum Dikonfirmasi</option>
+                    <option value="2">Telah Dikonfirmasi</option>
+                </select>
+            </div>
+        </div>
+        <!--Tanggal-->
+        <div class="col-md-3 item-fltr">
+            <div class="input-group">
+                <label for="awal" class="input-group-addon" id="req-tanggal_awal">Tanggal</label>
+                <input id="awal" class="form-control" type="text" value="${request.session['awal']}" name="awal">
+                <label for="akhir" class="input-group-addon" id="req-sd">s.d</label>
+                <input id="akhir" class="form-control" type="text" value="${request.session['akhir']}" name="akhir">
+            </div>
+        </div>
+        <div class="col-md-1 item-fltr">
+            <button id="btn_filter" name="btn_filter" class="btn btn btn-primary" type="submit">Filter</button>
+        </div>
+    </div>
+
+    <table id="table1" class="table ">
+        <thead>
+        <tr>
+            <th>No.Berkas</th>
+            <th>Tanggal</th>
+            <th>Seksi Pengirim</th>
+            <th>Petugas Pengirim</th>
+            <th>Seksi Penerima</th>
+            <th>Jml Berkas</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<div metal:fill-slot="scripts">
+    <script type="text/javascript" src="/static/js/tools.js"></script>
+    <script>
+        var oTable;
+        var oTableUri = "${request.url}";
+        var oTableUrl = oTableUri+"/grid/act";
+        var mID = 0;
+        $(document).ready(function () {
+            function getDataUrl() {
+                return oTableUrl + '?awal=' + $('#awal').val() + '&akhir=' + $('#akhir').val() + '&status=' + $('#status').val();
+            }
+            oTable = $('#table1').DataTable({
+                dom           : '<"toolbar">lfrtip',
+                processing    : true,
+                serverSide    : true,
+                ajax          : getDataUrl(),
+                stateSave     : false,
+                scrollCollapse: true,
+                info          : true,
+                filter        : true,
+                autoWidth     : false,
+                paginate      : true,
+                paginationType: "full_numbers",
+                lengthMenu: [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "Semua"]
+                ],
+                order: [[1, 'asc']],
+                sort:true,
+                columns: [
+                    { "data": "id",  "width": "80px", "class":"left"},
+                    { "data": "tgl_berkas",  "width": "80px", "class":"center"},
+                    { "data": "seksi_kirim",  "width": "200px", "class":"left"},
+                    { "data": "petugas_kirim",  "width": "120px", "class":"left"},
+                    { "data": "seksi_terima",  "width": "200px", "class":"left"},
+                    { "data": "jml_berkas",  "width": "80px", "class":"right", 
+                        "render" : $.fn.dataTable.render.number( '.', ',', 0, '' )
+                    },
+                    { "data": "nip_penerima",  "width": "80px", "class":"center", 
+                        "render": function (data, type, full, meta) {
+                                    return (data) ? 'Diterima' : '';
+                                 }
+                    },
+                ],
+                fnRowCallback: function (nRow, aData, iDisplayIndex) {
+                    mID = 0;
+                }
+            });
+
+            var tb_array = [
+                '<div class="btn-group pull-left">',
+                '<button id="btn_add" class="btn btn btn-success" type="button">Tambah</button>',
+                '<button id="btn_edit" class="btn btn btn-warning" type="button">Edit</button>',
+                '<button id="btn_cetak" class="btn btn btn-primary" type="button">Cetak</button>',
+                '<button id="btn_close" class="btn btn btn-default" type="button">Tutup</button>',
+                '&nbsp;',
+                '</div>',
+            ];
+
+            var tb = tb_array.join(' ');
+            $("div.toolbar").html(tb);
+            $("div.toolbar").attr('style', 'display:block; float: left; margin-bottom:6px; line-height:16px;');
+
+            $("#btn_filter").click(function () {
+                oTable.ajax.url(getDataUrl()).load();
+            });
+
+            $('#status').on('change', function(){
+                $("#btn_filter").click();
+            });
+
+            $('#awal, #akhir').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:'dd-mm-yy'
+            });
+
+            $('#table1 tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                } else {
+                    var aData = oTable.row( this ).data();
+                    oTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    mID = aData.id;
+                    oTable.$('tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                }
+            });
+
+            $('#btn_add').click(function () {
+                window.location = oTableUri + '/add';
+            });
+
+            $('#btn_edit').click(function () {
+                if (mID) {
+                    var aData = oTable.row($('#table1 tbody tr.row_selected')).data();
+                    if (aData.nip_penerima) {
+                        alert('Data sudah tidak dapat diedit');
+                    } else {
+                        window.location = oTableUri + '/' + mID + '/edt';
+                    }
+                }
+                else alert('Pilih Baris yang akan di edit');
+            });
+
+            $("#btn_close").click(function () {
+                window.location = '/pbb';
+                return false;
+            });
+        })
+    </script>
+</div>
+
+</html>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no" ?>
+<!DOCTYPE document SYSTEM "rml_1_0.dtd">
+<document>
+    <template pagesize="21cm, 29.7cm">
+        <pageTemplate id="page1">
+            <pageGraphics>
+                <setFont name="Helvetica-Bold" size="14"/>
+                <drawCenteredString  x="10.5cm" y="27.7cm">PEMERINTAH {company}</drawCenteredString >
+                <setFont name="Helvetica-Bold" size="12"/>
+                <drawCenteredString x="10.5cm" y="27.1cm">{departement}</drawCenteredString>
+                <setFont name="Helvetica-Bold" size="8"/>
+                <drawCenteredString  x="10.5cm" y="26.5cm">{address}</drawCenteredString >
+                
+                <image file="{logo}" preserveAspectRatio="1" x="2cm" y="727" width="75" height="75"/>
+                <lineMode width="1"/>
+                <lines>2cm 25.5cm 19cm 25.5cm</lines>
+            </pageGraphics>
+            <frame id="content" x1="2cm" y1="1cm" width="17cm" height="24cm"/>
+        </pageTemplate>
+    </template>
+    
+    <stylesheet>
+        <paraStyle name="title1"
+            fontName="Helvetica-Bold"
+            fontSize="16"
+            spaceAfter="16"
+            align="center"/>
+        <paraStyle name="title2"
+            fontName="Helvetica-Bold"
+            fontSize="14"
+            spaceAfter="10"/>
+        <paraStyle name="heading1"
+            fontName="Helvetica-Bold"
+            fontSize="12"
+            spaceAfter="12"
+            alignment="center"/>
+        <paraStyle name="tableTitle"
+            fontName="Helvetica-Bold"
+            fontSize="9"
+            spaceAfter="10"
+            alignment="center"/>
+        <paraStyle name="tableBody"
+            fontName="Helvetica"
+            fontSize="8"
+            spaceAfter="8"/>
+        <paraStyle name="tableBody2"
+            fontName="Helvetica"
+            fontSize="8"
+            spaceAfter="8"
+            alignment="right"/>
+        <paraStyle name="body"
+            fontName="Helvetica"
+            fontSize="10"
+            spaceAfter="10"/>
+        <blockTableStyle id="table">
+            <blockValign start="0,0" stop="4,0" value="MIDDLE"/>
+            <blockAlignment value="right" start="0,1"/>
+            <blockAlignment value="left" start="1,1"/>
+            <blockAlignment value="center" start="2,1"/>
+            <blockAlignment value="left" start="3,1"/>
+            <blockAlignment value="left" start="4,1"/>
+                         
+            <blockFont name="Helvetica" size="9"/>
+            <!--blockFont name="Helvetica-Bold" size="10" start="0,0" stop="1,0"/>
+            <blockFont name="Helvetica-Bold" size="9" start="1,2" stop="5,3"/>
+            <blockFont name="Helvetica-Bold" size="9" start="1,7" stop="5,7"/-->
+            <lineStyle kind="GRID" colorName="black"/>
+            <!--blockSpan start="0,0" stop="0,1"/>
+            <blockSpan start="1,0" stop="1,1"/>
+            <blockSpan start="2,0" stop="3,0"/>
+            <blockSpan start="4,0" stop="5,0"/-->
+            <!--lineStyle kind="LINEBEFORE" colorName="black" start="0,0" thickness="1"/>
+            <lineStyle kind="LINEAFTER" colorName="black" start="5,0" thickness="1"/>
+            <lineStyle kind="LINEABOVE" colorName="black" start="0,0" stop="5,1" thickness="1"/>
+            <lineStyle kind="LINEBELOW" colorName="black" start="0,0" stop="5,1" thickness="1"/>
+            <lineStyle kind="LINEBELOW" colorName="black" start="0,7" stop="5,7" thickness="1"/-->
+        </blockTableStyle>
+        <paraStyle name="h1" fontName="Helvetica-BoldOblique" fontSize="14" leading="36" spaceBefore="12"/>
+        <paraStyle name="normal" fontName="Helvetica" fontSize="10" leading="10" />
+        <paraStyle name="spaced" fontName="Helvetica" fontSize="10" leading="12" spaceBefore="12" spaceAfter="12"/>
+        <paraStyle name="intro"  fontName="Helvetica" fontSize="12" leading="12" spaceAfter="12"/>
+        <paraStyle name="ttd-kota" fontName="Helvetica" 
+            fontSize="12" leading="12" spaceBefore="12"
+            alignment="center" x1="12cm"/>
+    </stylesheet>
+    
+    <story>
+        <setNextTemplate name="page1"/>
+        <para style="heading1">Nomor Pelayanan : {nopel}</para>
+        <blockTable colWidths="1.5cm,4.5cm,1.5cm,5.5cm,4cm" style="table" repeatRows="1">
+            <tr>
+                <td><para style="tableTitle">Nomor</para></td>
+                <td><para style="tableTitle">NOP</para></td>
+                <td><para style="tableTitle">Tahun</para></td>
+                <td><para style="tableTitle">Jenis Pelayanan</para></td>
+                <td><para style="tableTitle">Nama WP</para></td>
+            </tr>
+            {rows}
+        </blockTable>
+        <!--namedString id="last-page"><pageNumber/></namedString-->
+    </story>
+</document>

@@ -1,0 +1,25 @@
+id,kode,path,nama,status
+9200000,"simral","/simral","Integrasi - SIMRAL",1
+9200010,"simral-ketetapan","/simral/ketetapan","SIMRAL# Ketetapan",1
+9200011,"simral-ketetapan-act","/simral/ketetapan/{act}/act","SIMRAL# Ketetapan Act",1
+9200020,"simral-realisasi","/simral/realisasi","SIMRAL# Realisasi",1
+9200021,"simral-realisasi-act","/simral/realisasi/{act}/act","SIMRAL# Realisasi Act",1
+9200030,"simral-sts","/simral/sts","SIMRAL# STS",1
+9200031,"simral-sts-act","/simral/sts/{act}/act","SIMRAL# STS Act",1
+9200032,"simral-sts-add","/simral/sts/add","SIMRAL# STS Add",1
+9200033,"simral-sts-edit","/simral/sts/{id}/edit","SIMRAL# STS Edit",1
+9200034,"simral-sts-delete","/simral/sts/{id}/delete","SIMRAL# STS Delete",1
+9200040,"simral-sts-item","/simral/sts/item","SIMRAL# STS",1
+9200041,"simral-sts-item-act","/simral/sts/item/{act}/act","SIMRAL# STS Act",1
+9200042,"simral-sts-item-add","/simral/sts/item/add","SIMRAL# STS Add",1
+9200043,"simral-sts-item-edit","/simral/sts/item/{id}/edit","SIMRAL# STS Edit",1
+9200044,"simral-sts-item-delete","/simral/sts/item/{id}/delete","SIMRAL# STS Delete",1
+9200050,"simral-ws","/simral/ws","SIMRAL# Web Service",1
+9200051,"simral-ws-ketetapan-api","/simral/ws/ketetapan/{tgl}/api","SIMRAL# Web Service Ketetapan",1
+9200052,"simral-ws-realisasi-api","/simral/ws/realisasi/{tgl}/api","SIMRAL# Web Service Realisasi",1
+9200053,"simral-ws-sts-api","/simral/ws/sts/{tgl}/api","SIMRAL# Web Service STS",1
+9200060,"simral-rekening","/simral/rekening","SIMRAL# Rekening",1
+9200061,"simral-rekening-act","/simral/rekening/{act}/act","SIMRAL# Rekening Act",1
+9200062,"simral-rekening-add","/simral/rekening/add","SIMRAL# Rekening Add",1
+9200063,"simral-rekening-edit","/simral/rekening/{id}/edit","SIMRAL# Rekening Edit",1
+9200064,"simral-rekening-delete","/simral/rekening/{id}/delete","SIMRAL# Rekening Delete",1

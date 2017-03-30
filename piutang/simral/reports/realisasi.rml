@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no" ?>
+<!DOCTYPE document SYSTEM "rml_1_0.dtd">
+<document>
+    <template pagesize="29.7cm, 21cm">
+        <pageTemplate id="page1">
+            <pageGraphics>
+                <setFont name="Helvetica-Bold" size="14"/>
+                <!-- <drawString  x="2cm" y="27.4cm">PEMERINTAH {company}</drawString > -->
+                <drawCenteredString  x="14.85cm" y="19.7cm">PEMERINTAH {company}</drawCenteredString >
+                <!-- <drawRightString  x="19cm" y="27.7cm">PEMERINTAH {company}</drawRightString > -->
+                <setFont name="Helvetica-Bold" size="12"/>
+                <drawCenteredString x="14.85cm" y="19.2cm">{departement}</drawCenteredString>
+                <setFont name="Helvetica-Bold" size="8"/>
+                <drawCenteredString  x="14.85cm" y="18.7cm">{address}</drawCenteredString >
+                <image file="{logo}" preserveAspectRatio="1" x="2cm" y="525" width="50" height="50"/>
+                <image file="{line}" preserveAspectRatio="0" x="2cm" y="515" width="25.7cm" height="10"/>            
+            </pageGraphics>
+            <pageGraphics>
+                <setFont name="Helvetica" size="10"/>
+                <drawString x="2cm" y="1.5cm">{waktu}</drawString>
+                <drawRightString x="27.7cm" y="1.5cm">Halaman <pageNumber/> / <getName id="last-page" default="1"/></drawRightString>
+            </pageGraphics>
+            <frame id="content" x1="2cm" y1="2cm" width="26cm" height="16cm"/> <!-- width="17cm" height="24cm"/> -->
+        </pageTemplate>
+
+        <pageTemplate id="page2">
+            <!-- <pageGraphics> -->
+                <!-- <setFont name="Helvetica" size="10"/> -->
+                <!-- <drawString x="2cm" y="27.7cm">{waktu}</drawString> -->
+                <!-- <drawRightString x="27.7cm" y="27.7cm">Halaman <pageNumber/> / <getName id="last-page" default="1"/></drawRightString> -->
+            <!-- </pageGraphics> -->
+            
+            
+            <pageGraphics>
+                <setFont name="Helvetica" size="10"/>
+                <drawString x="2cm" y="1.5cm">{waktu}</drawString>
+                <drawRightString x="27.7cm" y="1.5cm">Halaman <pageNumber/> / <getName id="last-page" default="1"/></drawRightString>
+            </pageGraphics>
+            <frame id="content" x1="2cm" y1="2cm" width="26cm" height="18cm"/>
+        </pageTemplate>
+        
+    </template>
+    
+    <stylesheet>
+        <paraStyle name="title1"
+            fontName="Helvetica-Bold"
+            fontSize="16"
+            spaceAfter="16"
+            align="center"/>
+        <paraStyle name="title2"
+            fontName="Helvetica-Bold"
+            fontSize="14"
+            spaceAfter="10"/>
+        <paraStyle name="heading1"
+            fontName="Helvetica-Bold"
+            fontSize="12"
+            spaceAfter="12"
+            alignment ="center"/>
+        <paraStyle name="tableTitle"
+            fontName="Helvetica-Bold"
+            fontSize="8"
+            spaceAfter="8"/>
+        <paraStyle name="tableBody"
+            fontName="Helvetica"
+            fontSize="8"
+            spaceAfter="8"/>
+        <paraStyle name="tableBodyRight"
+            fontName="Helvetica"
+            fontSize="8"
+            spaceAfter="8"
+            alignment ="right"/>
+        
+        <paraStyle name="body"
+            fontName="Helvetica"
+            fontSize="8"
+            spaceAfter="8"/>
+        <blockTableStyle id="table">
+             <blockValign start="0,0" stop="-1,-1" value="TOP"/>
+             <blockAlignment value="left" start="0,0" stop="0,-1"/>
+                    <!-- <blockAlignment value="centre" start="2,0" stop="2,-1"/> -->
+             <blockFont name="Helvetica" size="10"/> 
+                    <!-- <blockFont name="Helvetica-Bold" size="10" start="2,0" stop="2,0"/> -->
+             <lineStyle kind="GRID" colorName="black"/>
+                    <!-- <lineStyle kind="OUTLINE" colorName="black" thickness="2"/> -->
+             <blockBackground colorName="yellow" start="0,0" stop="-1,0"/>
+        </blockTableStyle>
+    <paraStyle name="h1" fontName="Helvetica-BoldOblique" fontSize="14" leading="36" spaceBefore="12"/>
+    <paraStyle name="normal" fontName="Helvetica" fontSize="10" leading="10" />
+    <paraStyle name="spaced" fontName="Helvetica" fontSize="10" leading="12" spaceBefore="12" spaceAfter="12"/>
+    <paraStyle name="intro"  fontName="Helvetica" fontSize="12" leading="12" spaceAfter="12"/>
+
+    
+    </stylesheet>
+    
+    <story>
+        <setNextTemplate name="page2"/>
+        <para style="heading1">Daftar Realisasi</para>
+        <blockTable colWidths="5cm,2cm,3cm,2cm,5.5cm,1.75cm,3cm,2cm,1.5cm" style="table" repeatRows="1">
+            <tr>
+                <!-- <td><para style="tableTitle">ID</para></td> -->
+                <td><para style="tableTitle">No. Trx</para></td>
+                <td><para style="tableTitle">Tgl Buku</para></td>
+                <td><para style="tableTitle">Jns. Trx</para></td>
+                <!-- <td><para style="tableTitle">No. Bukti</para></td> -->
+                <td><para style="tableTitle">Tgl. Bukti</para></td>
+                <td><para style="tableTitle">Penyetor</para></td>
+                <td><para style="tableTitle">Rekening</para></td>
+                <td><para style="tableTitle">Pokok</para></td>
+                <td><para style="tableTitle">Denda</para></td>
+                <td><para style="tableTitle">Src</para></td>
+            </tr>
+            {rows}
+        </blockTable>
+        <namedString id="last-page"><pageNumber/></namedString>
+    </story>
+</document>

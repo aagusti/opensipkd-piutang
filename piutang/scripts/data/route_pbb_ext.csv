@@ -1,0 +1,71 @@
+id,kode,path,nama,status
+50000,"pbb-akrual","/pbb/akrual","PBB-Akrual",1
+50001,"pbb-sa","/pbb/sa","PBB-Saldo Awal",1
+50002,"pbb-sa-act","/pbb/sa/{id}/act","PBB-Saldo Awal Act",1
+50003,"pbb-sa-view","/pbb/sa/{id}/view","PBB-Saldo Awal View",1
+50004,"pbb-sa-post","/pbb/sa/{id}/post","PBB-Saldo Awal Post",1
+50005,"pbb-sa-add","/pbb/sa/add","PBB-Saldo Awal Tambah",1
+50006,"pbb-sa-delete","/pbb/sa/{id}/delete","PBB-Saldo Awal Hapus",1
+50007,"pbb-sa-edit","/pbb/sa/{id}/edit","PBB-Saldo Awal Edit",1
+50008,"pbb-sa-rpt","/pbb/sa/{rpt}/rpt","PBB-Saldo Awal rpt",1
+50011,"pbb-sppt","/pbb/sppt","PBB-SPPT",1
+50012,"pbb-sppt-act","/pbb/sppt/{id}/act","PBB-SPPT Action",1
+50013,"pbb-sppt-view","/pbb/sppt/{id}/view","PBB-SPPT View",1
+50014,"pbb-sppt-post","/pbb/sppt/{id}/post","PBB-SPPT Posting",1
+50015,"pbb-sppt-rpt","/pbb/sppt/{rpt}/rpt","PBB-SPPT rpt",1
+50021,"pbb-ketetapan","/pbb/ketetapan","PBB-SPPT Akrual",1
+50022,"pbb-ketetapan-act","/pbb/ketetapan/{id}/act","PBB-SPPT Akrual Action",1
+50023,"pbb-ketetapan-view","/pbb/ketetapan/{id}/view","PBB-SPPT Akrual View",1
+50024,"pbb-ketetapan-post","/pbb/ketetapan/{id}/post","PBB-SPPT Akrual Posting",1
+50025,"pbb-ketetapan-rpt","/pbb/ketetapan/{rpt}/rpt","PBB-SPPT Akrual rpt",1
+50031,"pbb-ketetapan-rekap","/pbb/ketetapan/rekap","PBB Ketetapan Rekap",1
+50032,"pbb-ketetapan-rekap-act","/pbb/ketetapan/rekap/{id}/act","PBB Ketetapan Act",1
+50033,"pbb-ketetapan-rekap-view","/pbb/ketetapan/rekap/{id}/view","PBB Ketetapan View",1
+50034,"pbb-ketetapan-rekap-post","/pbb/ketetapan/rekap/{id}/post","PBB Ketetapan Post",1
+50035,"pbb-ketetapan-rekap-rpt","/pbb/ketetapan/rekap/{rpt}/rpt","PBB Ketetapan rpt",1
+50041,"pbb-realisasi","/pbb/realisasi","PBB Realisasi",1
+50042,"pbb-realisasi-act","/pbb/realisasi/{id}/act","PBB Realisasi Act",1
+50043,"pbb-realisasi-view","/pbb/realisasi/{id}/view","PBB Realisasi View",1
+50044,"pbb-realisasi-post","/pbb/realisasi/{id}/post","PBB Realisasi Post",1
+50045,"pbb-realisasi-rpt","/pbb/realisasi/{rpt}/rpt","PBB Realisasi rpt",1
+50051,"pbb-realisasi-rekap","/pbb/realisasi/rekap","PBB Realisasi Rekap",1
+50052,"pbb-realisasi-rekap-act","/pbb/realisasi/rekap/{id}/act","PBB Realisasi Act",1
+50053,"pbb-realisasi-rekap-view","/pbb/realisasi/rekap/{id}/view","PBB Realisasi View",1
+50054,"pbb-realisasi-rekap-post","/pbb/realisasi/rekap/{id}/post","PBB Realisasi Post",1
+50055,"pbb-realisasi-rekap-rpt","/pbb/realisasi/rekap/{rpt}/rpt","PBB Realisasi rpt",1
+50061,"pbb-sensus","/pbb/sensus","PBB Sensus",1
+50062,"pbb-sensus-act","/pbb/sensus/{id}/act","PBB Sensus ACT",1
+50063,"pbb-sensus-add","/pbb/sensus/add","PBB Sensus Tambah",1
+50064,"pbb-sensus-edit","/pbb/sensus/{id}/edit","PBB Sensus Edit",1
+50065,"pbb-sensus-delete","/pbb/sensus/{id}/delete","PBB Sensus Hapus",1
+50066,"pbb-sensus-post","/pbb/sensus/{id}/post","PBB Sensus Posting",1
+50067,"pbb-sensus-rpt","/pbb/sensus/{rpt}/rpt","PBB Sensus Report",1
+50068,"pbb-sensus-csv","/pbb/sensus/csv","PBB Sensus CSV",1
+50069,"pbb-sensus-upload","/pbb/sensus/upload","PBB Sensus Upload",1
+50070,"pbb-sensus-verify","/pbb/sensus/{id}/verify","PBB Sensus Verifikasi",1
+51000,"pbb-ws","/pbb/ws","Web Service PBB",1
+52000,"es_home","/esppt","Elektronik SPPT",1
+52001,"es_home_act","/esppt/{act}/act","Elektronik SPPT Action",1
+52002,"es_nop","/esppt/nop/add","Elektronik SPPT Add Nop",1
+52003,"es_profile","/esppt/profile","Elektronik SPPT Profile",1
+52004,"es_profile_add","/esppt/profile/add","Elektronik SPPT Profile Add",1
+52020,"es_admin","/esppt/admin","Elektronik SPPT Admin",1
+52021,"es_admin_act","/esppt/admin/{act}/act","Elektronik SPPT Admin Action",1
+52030,"es_reg","/esppt/reg","Elektronik Register",1
+52031,"es_reg_act","/esppt/reg/{act}/act","Elektronik SPPT Registrasi",1
+52040,"es_report_act","/esppt/{act}/report","Elektronik SPPT Report Action",1
+52050,"es_gen_sppt","/esppt/{thn}/generate","Elektronik SPPT Report SPPT",1
+52060,"es_help","/esppt/help","Elektronik SPPT Help",1
+53000,"pbb-tools","/pbb/tools","PBB Utilitas",1
+53010,"pbb-rekon-sppt-pos-sismiop","/pbb/rekon/sppt-pos-sismiop","PBB Rekon SPPT POS-SISMIOP",1
+53011,"pbb-rekon-sppt-pos-sismiop-act","/pbb/rekon/sppt-pos-sismiop/{act}/act","PBB Rekon SPPT POS-SISMIOP",1
+53012,"pbb-rekon-sppt-pos-sismiop-csv","/pbb/rekon/sppt-pos-sismiop/{csv}/csv","PBB Rekon SPPT POS-SISMIOP",1
+53013,"pbb-rekon-sppt-sismiop-pos","/pbb/rekon/sppt-sismiop-pos","PBB Rekon SPPT SISMIOP-POS",1
+53014,"pbb-rekon-sppt-sismiop-pos-act","/pbb/rekon/sppt-sismiop-pos/{act}/act","PBB Rekon SPPT SISMIOP-POS",1
+53015,"pbb-rekon-sppt-sismiop-pos-csv","/pbb/rekon/sppt-sismiop-pos/{csv}/csv","PBB Rekon SPPT SISMIOP-POS",1
+53020,"pbb-rekon-psppt-pos-sismiop","/pbb/rekon/psppt-pos-sismiop","PBB Rekon Pembayaran POS-SISMIOP",1
+53021,"pbb-rekon-psppt-pos-sismiop-act","/pbb/rekon/psppt-pos-sismiop/{act}/act","PBB Pembayaran SPPT POS-SISMIOP",1
+53022,"pbb-rekon-psppt-pos-sismiop-csv","/pbb/rekon/psppt-pos-sismiop/{csv}/csv","PBB Pembayaran SPPT POS-SISMIOP",1
+53023,"pbb-rekon-psppt-sismiop-pos","/pbb/rekon/psppt-sismiop-pos","PBB Rekon Pembayaran SISMIOP-POS",1
+53024,"pbb-rekon-psppt-sismiop-pos-act","/pbb/rekon/psppt-sismiop-pos/{act}/act","PBB Rekon Pembayaran SISMIOP-POS",1
+53025,"pbb-rekon-psppt-sismiop-pos-csv","/pbb/rekon/psppt-sismiop-pos/{csv}/csv","PBB Rekon Pembayaran SISMIOP-POS",1

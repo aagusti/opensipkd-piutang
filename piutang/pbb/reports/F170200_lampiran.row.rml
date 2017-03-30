@@ -1,0 +1,7 @@
+<tr>
+    <td style="tableBody">{nomor}</td>
+    <td style="tableBody">{nop}</td>
+    <td style="tableBody2">{thnpajak}</td>
+    <td style="tableBody2">{jnspelayanan}</td>
+    <td style="tableBody2">{nmwp}</td>
+</tr>

@@ -1,0 +1,251 @@
+<html metal:use-macro="load: ../main.pt">
+<div metal:fill-slot="content">
+<div  class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">${request.title}</h3>
+    </div>
+    <div class="panel-body">
+    <form id="myform" method="post" enctype="multipart/form-data" accept-charset="utf-8" 
+         class="form-horizontal">
+        <div class="col-md-6">
+            <div class="form-group" tal:repeat="field form">
+                <div id="item-${field.oid}">
+                    <label for="${field.oid}" class="control-label col-md-4" id="req-${field.oid}">
+                            ${field.title}</label>
+                    <div class="col-md-8">
+                       ${structure:field.serialize()}
+                        <p id="error-${field.oid}" class="help-block" tal:condition="field.error"
+                           tal:repeat="error field.error.messages()">
+                           ${error}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4">&nbsp;</label>
+              <div class="col-md-6">
+                <button id="deformsave" name="simpan" type="submit" class="btn btn-primary "
+                    value="simpan">Simpan</button>
+                <button id="deformcancel" name="batal" type="submit" class="btn btn-danger "
+                    value="batal">Batal</button>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <table id="table1" class="table ">
+                <thead>
+                    <tr>
+                        <th>ID TRX</th>
+                        <th>No. Kohir</th>
+                        <th>Setoran</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    
+    <div id="divItem" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Tambah/Edit Item</h4>
+          </div>
+          <div class="modal-body">
+            <form id="myform" method="post" enctype="multipart/form-data" accept-charset="utf-8" 
+                class="form-horizontal">
+            <div class="form-group">
+                
+                <div id="item-old_no_kohir" class="hidden">
+                    <label for="old_no_kohir" class="control-label col-md-4" id="req-old_no_kohir">
+                            No Kohir Lama</label>
+                    <div class="col-md-8">
+                        <input type="text" name="old_no_kohir" 
+                               id="old_no_kohir" class=" form-control "/>
+                    </div>
+                </div>
+                
+                <div id="item-no_kohir">
+                    <label for="no_kohir" class="control-label col-md-4" id="req-no_kohir">
+                            No Kohir</label>
+                    <div class="col-md-8">
+                        <input type="text" name="no_kohir" 
+                               id="no_kohir" class=" form-control "/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div id="item-jumlah">
+                    <label for="jumlah" class="control-label col-md-4" id="req-jumlah">
+                            Jumlah</label>
+                    <div class="col-md-8">
+                    <input type="text" name="jumlah" value="1"
+                           id="jumlah" class=" form-control "/>
+                    </div>
+                </div>
+            </div>
+            </form>
+    
+          </div>
+          <div class="modal-footer">
+            <button id="btn_save_item" type="button" class="btn btn-default">Simpan</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+</div>
+</div>
+<div metal:fill-slot="scripts">
+<script>
+$(document).ready(function () {
+    $('#tgl_bukti_trx, #tgl_pembukuan').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat:'dd-mm-yy'
+    });
+    $('#tgl_bukti_trx, #tgl_pembukuan').attr('readonly',true);
+    $('#item-id').css('display','none');
+    
+});
+/////////////////////////////////////////////////////
+//DataTable
+/////////////////////////////////////////////////////
+var mID;
+var oTable;
+var oTableUri = "/simral/sts";
+var oTableUrl = oTableUri+"/gridItem/act";
+var aData;
+$(document).ready(function () {
+    oTable = $('#table1').DataTable({
+      dom           : '<"toolbar">lfrtip',
+      processing    : true,
+      serverSide    : true,
+      ajax          : oTableUrl+'?sts_id_trx='+$("#id_trx").val(),
+      stateSave     : true,
+      scrollCollapse: true,
+      sort          : true,
+      info          : false,
+      filter        : true,
+      autoWidth     : false,
+      paginate      : true,
+      paginationType: "full_numbers",
+      lengthMenu: [
+          [10, 25, 50, 100],
+          [10, 25, 50, 100]
+      ],
+      columns: [
+           { "data": "id" },
+           { "data": "no_kohir", "class":"left"},
+           { "data": "jumlah", "width": "75px", "class":"right"},
+      ],
+      "language": {
+        "search"  : "Cari: ",
+        "paginate":{
+            "first"   : "Pertama ",
+            "last"    : "Akhir ",
+            "previous": "Mundur ",
+            "next"    : "Maju ",
+        },
+        "lengthMenu": "_MENU_ baris "
+      },
+
+    });
+
+    var tb_array = [
+      '<div class="btn-group pull-left">',
+      '	<button id="btn_add"    class="btn btn btn-primary" type="button">Tambah</button>',
+      '	<button id="btn_edit"   class="btn btn btn-warning" type="button">Edit</button>',
+      '	<button id="btn_delete" class="btn btn btn-danger"  type="button">Hapus</button>',
+      '	&nbsp;',
+      '</div>',
+    ];
+
+    var tb = tb_array.join(' ');
+    $("div.toolbar").html(tb);
+    $("div.toolbar").attr('style', 'display:block; float: left; margin-bottom:6px; line-height:16px;');
+    
+    /////////////////////////////////////////////////////
+    //DataTable Action
+    /////////////////////////////////////////////////////
+    $('#table1 tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+            aData = null;
+            mID = null;
+        } else {
+            aData = oTable.row( this ).data();
+            oTable.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            mID = aData.id;
+            console.log(mID);
+            oTable.$('tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+            /*oTable2.fnReloadAjax("egaji/grid2?id=" + mID);*/                
+        }
+    });
+
+    $('#btn_add').click(function () {
+           $('#old_no_kohir').val("");
+           $('#no_kohir').val("");
+           $('#jumlah').val(0);
+           $('#divItem').modal("show");
+            
+    });
+
+    $('#btn_edit').click(function () {
+        if (mID) {
+           $('#old_no_kohir').val(aData.no_kohir);
+           $('#no_kohir').val(aData.no_kohir);
+           $('#jumlah').val(aData.jumlah);
+           $('#divItem').modal("show");
+        }
+        else alert('Pilih Baris yang akan di edit');
+    });
+
+    $('#btn_delete').click(function () {
+        if (mID) {
+            if (confirm('Yakin ID '+aData.no_kohir +' dihapus??')==true){
+                data = {sts_id_trx: $('#id_trx').val(),
+                no_kohir : aData.no_kohir};
+                
+                $.post( "/simral/sts/delItem/act", data)
+                    .done(function( data ) {
+                     if (data.success==true){
+                        $('#divItem').modal("hide");
+                        oTable.ajax.reload();
+                     }else{
+                        alert(data.msg);
+                     }
+                    });
+           };
+        }
+        else alert('Pilih Baris yang akan di hapus');
+    });    
+    
+    $('#btn_save_item').click(function () {
+        data = {sts_id_trx: $('#id_trx').val(),
+                old_no_kohir: $('#old_no_kohir').val(),
+                no_kohir : $('#no_kohir').val(),
+                jumlah   : $('#jumlah').val()
+           };
+        $.post( "/simral/sts/saveItem/act", data)
+          .done(function( data ) {
+             if (data.success==true){
+                $('#divItem').modal("hide");
+                oTable.ajax.reload();
+             }else{
+                alert(data.msg);
+             }
+          });
+    });
+});
+
+</script>      
+
+</div>
+</html>
+

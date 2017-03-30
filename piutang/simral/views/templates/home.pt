@@ -1,0 +1,40 @@
+<html metal:use-macro="load: main.pt">
+
+<div metal:fill-slot="content">
+
+<!-- Main component for a primary marketing message or call to action -->
+<div class="well">
+<h1>Pajak Daerah ${request.company} </h1>
+<p><img src="/static/img/logo.png" class="img-float img-thumbnail"/>
+Selamat datang  di module <code>Integrasi SIMRAL </code> ${request.company} module ini di desain untuk 
+menyiapkan data yang akan digunakan oleh aplikasi SIMRAL dimana data tersebut meliputi seluruh pajak baik 
+PBB P2, BPHTB maupun PDL.
+
+Module Aplikasi terdiri:
+<ul>
+<li>Ketetapan</li>
+<li>Realisasi</li>
+<li>STS</li>
+<li>Web Service</li>
+</ul>
+
+Module dibuat dengan menggunakan berbasiskan aplikasi Open Source yang terdiri dari
+
+<ul>
+    <li>
+        Python Web Framework <a href="http://pylonsproject.org/">Pyramid</a>
+    </li>
+    <li>
+        CSS Framework <a href="http://getbootstrap.com">Bootstrap</a>
+    </li> 
+    <li>
+        Javascript Framwork <a href="https://jquery.com/">jQuery</a>
+    </li>
+    
+</ul>
+
+</p>
+</div><!--well-->
+
+</div>
+</html>

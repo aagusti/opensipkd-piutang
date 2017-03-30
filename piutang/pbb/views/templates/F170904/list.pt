@@ -1,0 +1,99 @@
+<html metal:use-macro="load: ../main${request.session['project']}.pt">
+
+<div metal:fill-slot="content">
+    <style type="text/css">
+        .act-control {margin-right: 5px;}
+        .table > thead > tr > th {text-align:center; vertical-align: middle;}
+        select.input-sm {height:26px}
+    </style>
+    <h3>${request.title}</h3>
+    <hr>
+    <table id="table1" class="table ">
+        <thead>
+            <tr>
+                <th rowspan="2">NO</th>
+                <th rowspan="2">URAIAN</th>
+                <th colspan="2">PEDESAAN</th>
+                <th colspan="2">PERKOTAAN</th>
+            </tr>
+            <tr>
+                <th>WP</th>
+                <th>Ribuan (Rp)</th>
+                <th>WP</th>
+                <th>Ribuan (Rp)</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<div metal:fill-slot="scripts">
+    <script type="text/javascript" src="/static/js/tools.js"></script>
+    <script>
+      var oTable;
+      var oTableUri = "${request.url}";
+      var oTahun = "${request.session['tahun']}";
+      $(document).ready(function () {
+        oTable = $('#table1').DataTable({
+            dom         : '<"toolbar">lfrtip',
+            processing  : true,
+            serverSide  : true,
+            ajax        : oTableUri + "/grid?triwulan=1&tahun=" + oTahun,
+            filter      : false,
+            autoWidth   : false,
+            paginate    : false,
+            sort        : false,
+            selection   : false,
+            info        : false,
+            autoWidth   : false,
+            columns: [
+                { "data": "nomor",  "width": "30px", "class":"left"},
+                { "data": "uraian",  "width": "200px", "class":"left"},
+                { "data": "wpdesa",  "width": "100px", "class":"right"},
+                { "data": "rpdesa",  "width": "100px", "class":"right"},
+                { "data": "wpkota",  "width": "100px", "class":"right"},
+                { "data": "rpkota",  "width": "100px", "class":"right"},
+                ],
+        });
+        var tb_array = [
+            '<div class="btn-group">',
+            '<button id="btn_csv" class="btn btn btn-warning" type="button">CSV</button>',
+            '<button id="btn_pdf" class="btn btn btn-danger" type="button">PDF</button>',
+            '<button id="btn_close" class="btn btn btn-default" type="button">Tutup</button>',
+            '&nbsp;',
+            '</div>',
+            '<label for="tahun" class="control-label act-control" id="req-tahun">Tahun</label>',
+            '<input type="text" id="tahun" class="form-control act-control" style="display:inline;width:50px" value="' + oTahun + '">',
+            '<label for="triwulan" class="control-label act-control" id="req-triwulan">Triwulan</label>',
+            '<select id="triwulan" class="form-control act-control" style="display:inline;width:auto;"><option value="1">I</option><option value="2">II</option><option value="3">III</option><option value="4">IV</option></select>',
+            '<button id="btn_filter"  name="btn_filter"  class="btn btn btn-success act-control" type="button">Filter</button>'
+        ];
+
+        var tb = tb_array.join(' ');
+        $("div.toolbar").html(tb);
+        $("div.toolbar").attr('style', 'display:block; float: left; margin-bottom:6px; line-height:16px;');
+
+        $("#btn_filter").click(function () {
+            filter = "/grid?triwulan="+$("#triwulan").val()+"&tahun="+$("#tahun").val();
+            oTable.ajax.url(oTableUri+filter).load();
+        });
+
+        $('#btn_csv').click(function () {
+            url = oTableUri+"/rpt/csv?triwulan="+$("#triwulan").val()+"&tahun="+$("#tahun").val();
+            window.open(url);
+        });
+
+        $('#btn_pdf').click(function () {
+            url = oTableUri+"/rpt/pdf?triwulan="+$("#triwulan").val()+"&tahun="+$("#tahun").val();
+            window.open(url);
+        });
+        $("#btn_close").click(function () {
+            window.location = '/pbb';
+            return false;
+        });
+      });
+    </script>
+</div>
+
+</html>

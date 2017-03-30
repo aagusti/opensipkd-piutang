@@ -1,0 +1,8 @@
+<tr>
+    <td style="tableBody">{nomor}</td>
+    <td style="tableBody">{uraian}</td>
+    <td style="tableBody2">{wpdesa}</td>
+    <td style="tableBody2">{rpdesa}</td>
+    <td style="tableBody2">{wpkota}</td>
+    <td style="tableBody2">{rpkota}</td>
+</tr>

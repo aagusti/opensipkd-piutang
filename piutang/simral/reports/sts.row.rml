@@ -1,0 +1,9 @@
+<tr>
+    <td><para style="tableBody">{no_trx}</para></td>
+    <td><para style="tableBody">{tgl_pembukuan}</para></td>
+    <td><para style="tableBody">{jns_trx}</para></td>
+    <td><para style="tableBody">{no_bukti_trx}</para></td>
+    <td><para style="tableBody">{tgl_bukti_trx}</para></td>
+    <td><para style="tableBody">{uraian_trx}</para></td>
+    <td><para style="tableBodyRight">{jumlah}</para></td>
+</tr>

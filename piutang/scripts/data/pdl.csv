@@ -1,0 +1,15 @@
+70001,"pdl-sa","/pdl/sa","PDL-Saldo Awal",1
+70002,"pdl-sa-act","/pdl/sa/{id}/act","PDL-Saldo Awal Act",1
+70003,"pdl-sa-view","/pdl/sa/{id}/view","PDL-Saldo Awal View",1
+70004,"pdl-sa-post","/pdl/sa/{id}/post","PDL-Saldo Awal Post",1
+70005,"pdl-sa-add","/pdl/sa/add","PDL-Saldo Awal Tambah",1
+70006,"pdl-sa-delete","/pdl/sa/{id}/delete","PDL-Saldo Awal Hapus",1
+70007,"pdl-sa-edit","/pdl/sa/{id}/edit","PDL-Saldo Edit",1
+70011,"pdl-ketetapan","/pdl/ketetapan","PDL-Ketetapan",1
+70012,"pdl-ketetapan-act","/pdl/ketetapan/{id}/act","PDL-Ketetapan Action",1
+70013,"pdl-ketetapan-view","/pdl/ketetapan/{id}/view","PDL-Ketetapan View",1
+70014,"pdl-ketetapan-post","/pdl/ketetapan/{id}/post","PDL-Ketetapan Posting",1
+70021,"pdl-realisasi","/pdl/realisasi","PDL",1
+70022,"pdl-realisasi-act","/pdl/realisasi/{id}/act","PDL-Realisasi Act",1
+70023,"pdl-realisasi-view","/pdl/realisasi/{id}/view","PDL-Realisasi View",1
+70024,"pdl-realisasi-post","/pdl/realisasi/{id}/post","PDL-Realisasi Post",1

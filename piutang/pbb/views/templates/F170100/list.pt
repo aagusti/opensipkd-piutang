@@ -1,0 +1,137 @@
+<html metal:use-macro="load: ../main${request.session['project']}.pt">
+
+<div metal:fill-slot="content">
+    <h3>${request.title}</h3>
+    <hr>
+    <table id="table1" class="table ">
+        <thead>
+        <tr>
+            <th>Nomor</th>
+            <th>Pelayanan</th>
+            <th>SPPT</th>
+            <th>STTS</th>
+            <th>DHKP</th>
+            <th>SK</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<div metal:fill-slot="scripts">
+    <script type="text/javascript">
+        var oTable;
+        var oTableUri = "${request.url}";
+        var oTableUrl = oTableUri+"/grid/act";
+        var oTablePost = oTableUri+"/post/act";
+        var mID = 0;
+        $(document).ready(function () {
+            function getCheckbox(name, data) {
+                var ch = data ? ' checked' : '';
+                return '<input type="checkbox" name="' + name + '" ' +
+                        ch + '>';
+            }
+            oTable = $('#table1').DataTable({
+                dom         : '<"toolbar">lfrtip',
+                processing  : true,
+                serverSide  : true,
+                ajax        : oTableUrl,
+                filter      : false,
+                autoWidth   : false,
+                paginate    : false,
+                sort        : false,
+                selection   : false,
+                info        : false,
+                autoWidth   : false,
+                sort:false,
+                columns: [
+                    { "data": "id",  "width": "20px", "class":"left",
+                        "render": function (data, type, full, meta){
+                            return parseInt(data);
+                        }
+                    },
+                    { "data": "uraian",  "width": "200px", "class":"left"},
+                    { "data": "sppt",  "width": "50px", "class":"center",
+                        "render": function (data, type, full, meta){
+                            return getCheckbox('sppt', data);
+                        }
+                    },
+                    { "data": "stts",  "width": "50px", "class":"center",
+                        "render": function (data, type, full, meta){
+                            return getCheckbox('stts', data);
+                        }
+                    },
+                    { "data": "dhkp",  "width": "50px", "class":"center",
+                        "render": function (data, type, full, meta){
+                            return getCheckbox('dhkp', data);
+                        }
+                    },
+                    { "data": "sk",  "width": "50px", "class":"center",
+                        "render": function (data, type, full, meta){
+                            return getCheckbox('sk', data);
+                        }
+                    }
+                ],
+            });
+            $('#table1 tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                } else {
+                    var aData = oTable.row( this ).data();
+                    oTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    mID = aData.id;
+                    oTable.$('tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                }
+            });
+            $('#table1 tbody').on('change', 'tr td input[type="checkbox"]', function () {
+                var me = $(this);
+                var row = me.closest('tr');
+                var data = oTable.row(row).data();
+                var rowId = data.id;
+                var checked = me.is(":checked");
+                var pdata = new Object;
+                pdata['id'] = rowId;
+                pdata[me.attr('name')] = (checked) ? 1 : 0;
+                $.ajax({
+                    type: "POST",
+                    url: oTablePost,
+                    data : pdata,
+                    success: function (html) {
+                        $("#success").removeClass('alert alert-success');
+                        $("#errors").removeClass('alert alert-danger');
+                        $("#success").css('display', 'none', 'important');
+                        $("#errors").css('display', 'none', 'important');
+                        if (html.code != 0) {
+                            $("#success").addClass('alert alert-success');
+                            $("#success").css('display', 'block', 'important');
+                            $("#success").html("<span class='glyphicon glyphicon-ok'></span> " + html.msg);
+                        } 
+                        else {
+                            $("#errors").addClass('alert alert-danger');
+                            $("#errors").css('display', 'block', 'important');
+                            $("#errors").html("<span class='glyphicon glyphicon-remove'></span> " + html.msg);
+                        }
+                        oTable.ajax.reload();
+                    }
+                });
+            });
+            var tb_array = [
+                '<div class="btn-group pull-left">',
+                '<button id="btn_close" class="btn btn btn-default" type="button">Tutup</button>',
+                '&nbsp;',
+                '</div>',
+            ];
+
+            var tb = tb_array.join(' ');
+            $("div.toolbar").html(tb);
+            $("div.toolbar").attr('style', 'display:block; float: left; margin-bottom:6px; line-height:16px;');
+            $("#btn_close").click(function () {
+                window.location = '/pbb';
+                return false;
+            });
+        });
+    </script>
+</div>
+</html>

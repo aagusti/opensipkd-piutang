@@ -1,0 +1,29 @@
+<html metal:use-macro="load: base.pt">
+<div metal:fill-slot="navs">
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li tal:attributes="class request.path == '/' and 'active'"><a href="/">Home</a></li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Rekon <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="/pbb/rekon/sppt-sismiop-pos">SPPT SISMIOP - POSPBB</a></li>
+            <li><a href="/pbb/rekon/sppt-pos-sismiop">SPPT POSPBB - SISMIOP</a></li>
+            <li><a href="/pbb/rekon/psppt-sismiop-pos">Pembayaran SISMIOP - POSPBB</a></li>
+            <li><a href="/pbb/rekon/psppt-pos-sismiop">Pembayaran POSPBB - SISMIOP</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown" tal:attributes="class request.path in ['/password'] and 'active'">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="/logout">${request.user.nice_username()} Logout</a></li>
+            <li><a href="/password">Change password</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+</div>
+
+    
+</html>

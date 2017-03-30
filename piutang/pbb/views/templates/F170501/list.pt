@@ -1,0 +1,119 @@
+<html metal:use-macro="load: ../main${request.session['project']}.pt">
+
+<div metal:fill-slot="content">
+    <style type="text/css">
+        .table > thead > tr > th {text-align:center; vertical-align: middle;}
+        .toolbar .input-group .form-control {
+            width: 50px !important;
+        }
+        select.input-sm {height:26px}
+    </style>
+    <h3>${request.title}</h3>
+    <hr>
+    <table id="table1" class="table table-bordered">
+        <thead>
+        <tr>
+            <th rowspan="2">No.Berkas</th>
+            <th colspan="3">Pengirim</th>
+            <th colspan="3">Penerima</th>
+        </tr>
+        <tr>
+            <th>Seksi</th>
+            <th>NIP</th>
+            <th>Tanggal</th>
+            <th>Seksi</th>
+            <th>NIP</th>
+            <th>Tanggal</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<div metal:fill-slot="scripts">
+    <script type="text/javascript" src="/static/js/tools.js"></script>
+    <script>
+        var oTable;
+        var oTableUri = "${request.url}";
+        var oTableUrl = oTableUri+"/grid/act";
+        var mID = 0;
+        $(document).ready(function () {
+            function getDataUrl() {
+                var thn = $('#thn_pelayanan').val();
+                if (undefined == thn) thn = '';
+                var bundel = $('#bundel_pelayanan').val();
+                if (undefined == bundel) bundel = '';
+                var urut = $('#no_urut_pelayanan').val();
+                if (undefined == urut) urut = '';
+                return oTableUrl + '?thn=' + thn + '&bundel=' + bundel + '&urut=' + urut;
+            }
+            oTable = $('#table1').DataTable({
+                dom           : '<"toolbar">lfrtip',
+                processing    : true,
+                serverSide    : true,
+                ajax          : getDataUrl(),
+                stateSave     : false,
+                scrollCollapse: true,
+                info          : true,
+                filter        : true,
+                autoWidth     : false,
+                paginate      : true,
+                paginationType: "full_numbers",
+                lengthMenu: [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "Semua"]
+                ],
+                order: [[0, 'asc']],
+                sort:true,
+                columns: [
+                    { "data": "id", "width": "60px", "class":"left"},
+                    { "data": "seksi_kirim", "width": "100px", "class":"left"},
+                    { "data": "nip_kirim", "width": "100px", "class":"left"},
+                    { "data": "tgl_kirim", "width": "60px", "class":"center"},
+                    { "data": "seksi_terima", "width": "100px", "class":"left"},
+                    { "data": "nip_terima", "width": "100px", "class":"left"},
+                    { "data": "tgl_terima", "width": "60px", "class":"center"}
+                ]
+            });
+
+            var tb_array = [
+                '<div class="input-group">',
+                '<label for="thn_pelayanan" class="input-group-addon">No.Pelayanan</label>'+
+                '<input id="thn_pelayanan" name="thn_pelayanan" type="text" class="form-control">' +
+                '<input id="bundel_pelayanan" name="bundel_pelayanan" type="text" class="form-control">' +
+                '<input id="no_urut_pelayanan" name="no_urut_pelayanan" type="text" class="form-control">',
+                '</div>',
+                '<div class="btn-group">',
+                '<button id="btn_filter" name="btn_filter" class="btn btn btn-primary" type="submit">Filter</button>' +
+                '<button id="btn_close" class="btn btn btn-default" type="button">Tutup</button>',
+                '&nbsp;',
+                '</div>'
+            ];
+
+            var tb = tb_array.join(' ');
+            $("div.toolbar").html(tb);
+            $("div.toolbar").attr('style', 'display:block; float: left; margin-bottom:6px; line-height:16px;');
+
+            $("#btn_filter").click(function () {
+                oTable.ajax.url(getDataUrl()).load();
+            });
+            $('#table1 tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                } else {
+                    var aData = oTable.row( this ).data();
+                    oTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    mID = aData.id;
+                    oTable.$('tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                }
+            });
+            $("#btn_close").click(function () {
+                window.location = '/pbb';
+                return false;
+            });
+        })
+    </script>
+</div>
+</html>

@@ -1,0 +1,166 @@
+<html metal:use-macro="load: ../main${request.session['project']}.pt">
+
+<div metal:fill-slot="content">
+    <style type="text/css">
+        select.input-sm {height:26px}
+        .items-filter {
+            margin-left: -2px;
+            margin-bottom: 10px;
+        }
+        .items-filter .item-fltr {
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+    </style>
+    <h3>${request.title}</h3>
+    <hr>
+    <div class="row items-filter">
+        <!--Tanggal-->
+        <div class="col-md-3 item-fltr">
+            <div class="input-group">
+                <label for="awal" class="input-group-addon" id="req-tanggal_awal">Tanggal</label>
+                <input id="awal" class="form-control" type="text" value="${request.session['awal']}" name="awal">
+                <label for="akhir" class="input-group-addon" id="req-sd">s.d</label>
+                <input id="akhir" class="form-control" type="text" value="${request.session['akhir']}" name="akhir">
+            </div>
+        </div>
+        <div class="col-md-1 item-fltr">
+            <button id="btn_filter" name="btn_filter" class="btn btn btn-primary" type="submit">Filter</button>
+        </div>
+    </div>
+
+    <table id="table1" class="table ">
+        <thead>
+        <tr>
+            <th>NO.PEL</th>
+            <th>Pemohon</th>
+            <th>No. Surat Permohonan</th>
+            <th>Tgl. Surat Permohonan</th>
+            <!--th>Status Kolektif</th-->
+            <th>Tgl. Terima Dokumen</th>
+            <th>Tgl. Perkiraan Selesai</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<div metal:fill-slot="scripts">
+    <script type="text/javascript" src="/static/js/tools.js"></script>
+    <script>
+        var oTable;
+        var oTableUri = "${request.url}";
+        var oTableUrl = oTableUri+"/grid/act";
+        var mID = 0;
+        $(document).ready(function () {
+            oTable = $('#table1').DataTable({
+                dom           : '<"toolbar">lfrtip',
+                processing    : true,
+                serverSide    : true,
+                ajax          : oTableUrl,
+                stateSave     : false,
+                scrollCollapse: true,
+                info          : false,
+                filter        : true,
+                autoWidth     : false,
+                paginate      : true,
+                paginationType: "full_numbers",
+                lengthMenu: [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "Semua"]
+                ],
+                order: [[3, 'desc']],
+                sort:true,
+                columns: [
+                    { "data": "nopel",  "width": "70px", "class":"left"},
+                    { "data": "pemohon",  "width": "175px", "class":"left"},
+                    { "data": "no_surat",  "width": "120px", "class":"center"},
+                    { "data": "tgl_surat",  "width": "120px", "class":"center"},
+                    /*{ "data": "kolektif",  "width": "90px", "class":"center",
+                        "render": function (data, type, full, meta){
+                            return (data == 0) ? 'Individu' : 'Kolektif';
+                        }
+                    },*/
+                    { "data": "tgl_dokumen",  "width": "120px", "class":"center"},
+                    { "data": "tgl_selesai",  "width": "120px", "class":"center"},
+                ],
+            });
+
+            var tb_array = [
+                '<div class="btn-group pull-left">',
+                ' <button id="btn_add" class="btn btn btn-success" type="button">Tambah</button>',
+                ' <button id="btn_edit" class="btn btn btn-warning" type="button">Edit</button>',
+                //' <button id="btn_delete" class="btn btn btn-danger"  type="button">Hapus</button>',
+                ' <button id="btn_terima" class="btn btn btn-primary" type="button">Tanda Terima</button>',
+                ' <button id="btn_lamp" class="btn btn btn-primary" type="button">Lampiran</button>',
+                ' <button id="btn_close"  class="btn btn btn-default" type="button">Tutup</button>',
+                ' &nbsp;',
+                '</div>',
+            ];
+
+            var tb = tb_array.join(' ');
+            $("div.toolbar").html(tb);
+            $("div.toolbar").attr('style', 'display:block; float: left; margin-bottom:6px; line-height:16px;');
+
+            $("#btn_filter").click(function () {
+                filter = "?awal="+$("#awal").val()+"&akhir="+$("#akhir").val();
+                oTable.ajax.url(oTableUrl+filter).load();
+            });
+
+            $('#awal, #akhir').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat:'dd-mm-yy'
+            });
+
+            $('#table1 tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                } else {
+                    var aData = oTable.row( this ).data();
+                    oTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    mID = aData.id;
+                    oTable.$('tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                }
+            });
+
+            $('#btn_add').click(function () {
+                window.location = oTableUri+'/add';
+            });
+
+            $('#btn_edit').click(function () {
+                if (mID) window.location = oTableUri+'/'+mID+'/edt';
+                else alert('Pilih Baris yang akan di edit');
+            });
+
+            /*$('#btn_delete').click(function (e) {
+                if (rows_selected.length>1){
+                    alert('Hanya boleh 1 record yang di delete');
+                    return;
+                }
+                id = rows_selected.join(',');
+                if (id) window.location = oTableUri+'/'+id+'/del';
+                else alert('Pilih Baris yang akan di hapus');
+                e.stopPropagation();
+            });*/
+
+            $('#btn_terima').click(function () {
+                if (mID) window.open(oTableUri + '/ttr/rpt?id=' + mID);
+                else alert('Pilih Baris yang akan di edit');
+            });
+            $('#btn_lamp').click(function () {
+                if (mID) window.open(oTableUri + '/lamp/rpt?id=' + mID);
+                else alert('Pilih Baris yang akan di edit');
+            });
+
+            $("#btn_close").click(function () {
+                window.location = '/pbb';
+                return false;
+            });
+        })
+    </script>
+</div>
+
+</html>
